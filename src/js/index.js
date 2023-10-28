@@ -1,3 +1,3 @@
-import { galleryFilms } from "./gallery";
+import { galleryFilms, renderMovies } from './gallery';
 
-galleryFilms()
+galleryFilms();

@@ -1,22 +1,41 @@
-import { fetchInitalMovies } from './films.js';
+import { fetchInitalMovies, fetchMovieGenres } from './films.js';
+const movieList = document.querySelector('ul.movie__list');
 
-function galleryFilms(page=1, searchName = ''){
+function galleryFilms(page = 1, searchName = '') {
+  let genreArray;
 
-  const urlImg = 'https://image.tmdb.org/t/p/original/';
-  
-  const movieList = document.querySelector('ul.movie__list');
+  fetchMovieGenres()
+    .then(genres => {
+      genreArray = genres;
+    })
+    .catch(err => console.error(err));
 
   fetchInitalMovies(page, searchName)
     .then(response => {
       console.log(response);
       const movieArray = response.results;
-      console.log(movieArray);
+      renderMovies(movieArray, genreArray);
+    })
+    .catch(err => console.error(err));
+}
 
-      const movieMarkup = movieArray
-        .map(({ id, title, poster_path, release_date }) => {
-          const date = new Date(release_date);
-          const year = date.getFullYear();
-          return `
+function renderMovies(movieArray, genreArray) {
+  const movieMarkup = movieArray
+    .map(({ id, title, poster_path, release_date, genre_ids }) => {
+      const urlImg = 'https://image.tmdb.org/t/p/original/';
+      const date = new Date(release_date);
+      const year = date.getFullYear();
+      const genreIds = genre_ids;
+      let genres = [];
+
+      for (let i = 0; i < 2 && i < genreIds.length; i++) {
+        const genreId = genreIds[i];
+        const genre = genreArray.find(genre => genre.id === genreId);
+        if (genre) {
+          genres.push(genre.name);
+        }
+      }
+      return `
             <li class="movie__item" data-id ="${id}" >
               <img
                 class="movie__poster"
@@ -25,15 +44,13 @@ function galleryFilms(page=1, searchName = ''){
               />
               <div class="movie__info">
                 <h2 class="movie__title">${title}</h2>
-                <p class="movie__details">Drama,action | ${year}</p>
+                <p class="movie__details">${genres.join(', ')} | ${year}</p>
               </div>
             </li>`;
-        })
-        .join('');
-
-      movieList.insertAdjacentHTML('beforeend', movieMarkup);
     })
-    .catch(err => console.error(err));
+    .join('');
+
+  movieList.insertAdjacentHTML('beforeend', movieMarkup);
 }
 
-export{galleryFilms}
+export { galleryFilms, renderMovies };
