@@ -13,6 +13,9 @@
             <div class="hero__container">
                 <ul class="hero__Search">
                     <li class="hero__Film">
+                        <svg class="hero__film--logo" style="width:24px; height: 24px; fill: white">
+                            <use href="./img/sprite.svg#Filmoteka"></use>
+                        </svg>
                         <h1>Filmoteka</h1>
                     </li>
                     <li class="hero__btn--container">
@@ -28,7 +31,14 @@
             <div class="hero__Smovies--container">
                 <ul>
                     <li class="hero__SMovies">
-                        <p>Search Movies</p>
+                        <form class="hero__SMovies--bar" action="" method="get">
+                            <input type="text" id="busqueda" name="Películas" placeholder="What do you want to see?" required>
+                            <button type="submit" class="hero__SMovies--SVG">
+                                <svg class="search__icon" style="width: 20px; height: 20px;">
+                                    <use href="./img/sprite.svg#SearchSymbol"></use>
+                                </svg>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>

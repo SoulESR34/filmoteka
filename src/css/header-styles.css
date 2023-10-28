@@ -19,23 +19,23 @@
     width: 1200px;
 }
 
-.hero__place .hero__container .hero__Search{
+.hero__Search{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.hero__place .hero__Search .hero__Film{
+.hero__Film{
+    display: flex;
     width: 141px;
 }
 
-.hero__place .hero__Search .hero__Film h1{
+.hero__Film h1{
     font-family: Roboto;
     font-size: 30px;
     font-weight: 500;
     letter-spacing: 0em;
-    align-items: center;
     color: #ffffff;
     line-height: 35.16px;
 }
@@ -49,8 +49,8 @@
     justify-content: space-between;
 }
 
-.hero__place .hero__Search .hero__btn--home,
-.hero__place .hero__Search .hero__btn--library {
+.hero__btn--home,
+.hero__btn--library {
     font-family: Roboto;
     font-size: 12px;
     font-weight: 500;
@@ -62,21 +62,43 @@
     color: #ffffff;
 }
 
-.hero__place .hero__Search .hero__btn--home::after{
+.hero__btn--home::after{
     content: "";
     display: block;
     border-bottom: 2px solid #FF6B08;
     width: 34px;
 }
 
-.hero__place .hero__SMovies--container .hero__SMovies {
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #ffffff;
+.hero__SMovies {
+    width: 336px;
+    height: 20px;
+    border-bottom: 0.5px solid #FFFFFF;
+    display: flex;
+    justify-content: center;
+    margin: 37px auto 0px auto;
 }
 
+.hero__SMovies--bar {
+    width: 336px;
+    display: flex;
+    justify-content: space-between;
+}
 
+#busqueda {
+    background-color: transparent;
+    border: none;
+    width: 315px;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+#busqueda::placeholder {
+    color: #FFFFFF;
+}
+
+.hero__SMovies--SVG {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
