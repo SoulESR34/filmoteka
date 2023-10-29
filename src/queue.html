@@ -3,13 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/header-styles.css"">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <div class="container">
-
-        </div>
+        <section class="hero__placeV2">
+            <nav class="hero__Menu">
+                <div class="hero__container">
+                    <ul class="hero__Search">
+                        <li class="hero__Film">
+                            <svg class="hero__logo--film">
+                                <use href="./img/film (3).svg#film"></use>
+                            </svg>
+                            <a href="./index.html">Filmoteka</a>
+                        </li>
+                        <li class="hero__btn--container">
+                            <button class="hero__btn--homeV2">
+                                <a href="./index.html">HOME</a>
+                            </button>
+                            <button class="hero__btn--library">
+                                <a class="library--link" href="./queue.html">LIBRARY</a>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hero__btn--containerV2">
+                    <button class="hero__btn--WT">
+                        WATCHED
+                    </button>
+                    <button class="hero__btn--QU">
+                        QUEUE
+                    </button>
+                </div>
+            </nav>
+        </section>
     </header>
     <main>
         <section class="queue-films">
@@ -26,5 +54,6 @@
 
         </div>
     </footer>
+        <script href="./js/header.js"></script>
 </body>
 </html>

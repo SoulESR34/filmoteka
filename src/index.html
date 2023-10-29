@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/header-styles.css">
+    
     <title>Document</title>
 </head>
 <body>
@@ -13,17 +14,17 @@
             <div class="hero__container">
                 <ul class="hero__Search">
                     <li class="hero__Film">
-                        <svg class="hero__film--logo" style="width:24px; height: 24px; fill: white">
-                            <use href="./img/sprite.svg#Filmoteka"></use>
+                        <svg class="hero__logo--film">
+                            <use href="./img/film (3).svg#film"></use>
                         </svg>
-                        <h1>Filmoteka</h1>
+                        <a href="./index.html">Filmoteka</a>
                     </li>
                     <li class="hero__btn--container">
                         <button class="hero__btn--home">
                             HOME
                         </button>
-                        <button class="hero__btn--library">
-                            MY LIBRARY
+                        <button class="hero__btn--libraryV1">
+                            <a class="library--link" href="./queue.html">LIBRARY</a>
                         </button>
                     </li>
                 </ul>
@@ -32,7 +33,7 @@
                 <ul>
                     <li class="hero__SMovies">
                         <form class="hero__SMovies--bar" action="" method="get">
-                            <input type="text" id="busqueda" name="Películas" placeholder="What do you want to see?" required>
+                            <input type="search" id="busqueda" autocomplete="off" placeholder="What do you want to see?" required>
                             <button type="submit" class="hero__SMovies--SVG">
                                 <svg class="search__icon" style="width: 20px; height: 20px;">
                                     <use href="./img/sprite.svg#SearchSymbol"></use>
