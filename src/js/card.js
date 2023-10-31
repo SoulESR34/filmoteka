@@ -1,39 +1,40 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const openBtns = document.querySelectorAll('[data-id]');
-  const modalCard = document.querySelector('[data-modal-card]');
-  const cardData = document.querySelector('div.card__insert');
-  const cardImage = document.getElementById('moviePoster');
-  const cardLayout = document.querySelector('.card__layout');
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    const openBtns = document.querySelectorAll('[data-id]');
+    const modalCard = document.querySelector('[data-modal-card]');
+    const cardData = document.querySelector('div.card__insert');
+    const cardImage = document.getElementById('moviePoster');
+    const cardLayout = document.querySelector('.card__layout');
 
-  function getMovie(movieId) {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNjA3ZmFhNzAyNmY1Y2UzZjZmNWZmYjI2ODFjYzJjNSIsInN1YiI6IjY1M2IyYzc0NTE5YmJiMDBmZTViNjg5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lMk5N_OwLrQTWkN06X6OFLuWdV3OipM3GTHJIBE0hdE',
-      },
-    };
+    function getMovie(movieId) {
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNjA3ZmFhNzAyNmY1Y2UzZjZmNWZmYjI2ODFjYzJjNSIsInN1YiI6IjY1M2IyYzc0NTE5YmJiMDBmZTViNjg5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lMk5N_OwLrQTWkN06X6OFLuWdV3OipM3GTHJIBE0hdE',
+        },
+      };
 
-    const urlCard = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
-    fetch(urlCard, options)
-      .then(response => response.json())
-      .then(data => {
-        const movieData = data;
+      const urlCard = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
+      fetch(urlCard, options)
+        .then(response => response.json())
+        .then(data => {
+          const movieData = data;
 
-        const baseImageUrl = 'https://image.tmdb.org/t/p/w500';
-        const posterImageUrl = `${baseImageUrl}${movieData.poster_path}`;
+          const baseImageUrl = 'https://image.tmdb.org/t/p/w500';
+          const posterImageUrl = `${baseImageUrl}${movieData.poster_path}`;
 
-        const imgHTML = `<img
+          const imgHTML = `<img
               class="card__image--png"
               src="${posterImageUrl}"
               alt=""
             />`;
-        cardImage.insertAdjacentHTML('afterBegin', imgHTML);
+          cardImage.insertAdjacentHTML('afterBegin', imgHTML);
 
-        const imgHTML1 = `<h2 class="card__data--title" id="movieTitle">${
-          movieData.original_title ? movieData.original_title : 'N/A'
-        }</h2>
+          const imgHTML1 = `<h2 class="card__data--title" id="movieTitle">${
+            movieData.original_title ? movieData.original_title : 'N/A'
+          }</h2>
             <div class="card__characteristics">
               <table class="card__characteristics">
         <tr>
@@ -91,87 +92,91 @@ document.addEventListener('DOMContentLoaded', function () {
             </svg>
           </button>`;
 
-        cardData.insertAdjacentHTML('afterBegin', imgHTML1);
+          cardData.insertAdjacentHTML('afterBegin', imgHTML1);
 
-        const addQueue = document.querySelector('[data-add-queue]');
-        const addWatched = document.querySelector('[data-add-watched]');
+          const addQueue = document.querySelector('[data-add-queue]');
+          const addWatched = document.querySelector('[data-add-watched]');
 
-        addQueue.addEventListener('click', function (event) {
-          const queue = JSON.parse(localStorage.getItem('queue')) || [];
-          const queueAlready = queue.some(movie => movie.id === movieData.id);
-          console.log('consultado');
-          if (!queueAlready) {
-            queue.push(movieData);
-            localStorage.setItem('queue', JSON.stringify(queue));
-            alert('Added');
-            console.log('added');
-          } else {
-            alert('Already added');
-            console.log('not added');
-          }
-        });
-
-        addWatched.addEventListener('click', function (event) {
-          const watcehd = JSON.parse(localStorage.getItem('watched')) || [];
-          const watcehdAlready = watcehd.some(movie => movie.id === movieData.id);
-          console.log('consultado');
-          if (!watcehdAlready) {
-            watcehd.push(movieData);
-            localStorage.setItem('watched', JSON.stringify(watcehd));
-            alert('Added');
-            console.log('added');
-          } else {
-            alert('Already added');
-            console.log('not added');
-          }
-        });
-
-        const closeBtns = document.querySelectorAll('[data-modal-card-close]');
-        closeBtns.forEach(function (closeBtn) {
-          closeBtn.addEventListener('click', function (event) {
-            modalCard.classList.add('is-hidden');
-
-            setTimeout(function () {
-              cardData.innerHTML = '';
-              cardImage.innerHTML = '';
-            }, 500);
+          addQueue.addEventListener('click', function (event) {
+            const queue = JSON.parse(localStorage.getItem('queue')) || [];
+            const queueAlready = queue.some(movie => movie.id === movieData.id);
+            console.log('consultado');
+            if (!queueAlready) {
+              queue.push(movieData);
+              localStorage.setItem('queue', JSON.stringify(queue));
+              alert('Added');
+              console.log('added');
+            } else {
+              alert('Already added');
+              console.log('not added');
+            }
           });
-        });
-      })
 
-      .catch(err => console.error(err));
-  }
+          addWatched.addEventListener('click', function (event) {
+            const watcehd = JSON.parse(localStorage.getItem('watched')) || [];
+            const watcehdAlready = watcehd.some(
+              movie => movie.id === movieData.id
+            );
+            if (!watcehdAlready) {
+              watcehd.push(movieData);
+              localStorage.setItem('watched', JSON.stringify(watcehd));
+              alert('Added');
+              console.log('added');
+            } else {
+              alert('Already added');
+              console.log('not added');
+            }
+          });
 
-  openBtns.forEach(function (openBtn) {
-    openBtn.addEventListener('click', function (event) {
-      let movieId = openBtn.getAttribute('data-id');
-      console.log(movieId);
-      getMovie(movieId);
+          const closeBtns = document.querySelectorAll(
+            '[data-modal-card-close]'
+          );
+          closeBtns.forEach(function (closeBtn) {
+            closeBtn.addEventListener('click', function (event) {
+              modalCard.classList.add('is-hidden');
 
-      setTimeout(function () {
-        modalCard.classList.remove('is-hidden');
-      }, 500);
+              setTimeout(function () {
+                cardData.innerHTML = '';
+                cardImage.innerHTML = '';
+              }, 500);
+            });
+          });
+        })
+
+        .catch(err => console.error(err));
+    }
+
+    openBtns.forEach(function (openBtn) {
+      openBtn.addEventListener('click', function (event) {
+        let movieId = openBtn.getAttribute('data-id');
+        console.log(movieId);
+        getMovie(movieId);
+
+        setTimeout(function () {
+          modalCard.classList.remove('is-hidden');
+        }, 500);
+      });
     });
-  });
 
-  document.addEventListener('keydown', event => {
-    console.log(event.key);
-    if (event.key === 'Escape') {
-      modalCard.classList.toggle('is-hidden');
-      cardData.innerHTML = '';
-      cardImage.innerHTML = '';
-    }
-  });
+    document.addEventListener('keydown', event => {
+      console.log(event.key);
+      if (event.key === 'Escape') {
+        modalCard.classList.toggle('is-hidden');
+        cardData.innerHTML = '';
+        cardImage.innerHTML = '';
+      }
+    });
 
-  document.addEventListener('click', function (event) {
-    if (event.target === modalCard) {
-      modalCard.classList.add('is-hidden');
-      cardData.innerHTML = '';
-      cardImage.innerHTML = '';
-    }
-  });
+    document.addEventListener('click', function (event) {
+      if (event.target === modalCard) {
+        modalCard.classList.add('is-hidden');
+        cardData.innerHTML = '';
+        cardImage.innerHTML = '';
+      }
+    });
 
-  cardLayout.addEventListener('click', function (event) {
-    event.stopPropagation();
-  });
+    cardLayout.addEventListener('click', function (event) {
+      event.stopPropagation();
+    });
+  }, 2000);
 });
